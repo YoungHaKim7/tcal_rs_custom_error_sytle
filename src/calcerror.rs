@@ -10,6 +10,7 @@ pub enum CalcError {
     Interrupted,
     InvalidToken,
     InvalidParse,
+    InvalidAssignment,
 }
 
 impl fmt::Display for CalcError {
@@ -21,6 +22,7 @@ impl fmt::Display for CalcError {
             Self::Interrupted => write!(f, "computation interrupted"),
             Self::InvalidToken => write!(f, "invalid token"),
             Self::InvalidParse => write!(f, "invalid parse"),
+            Self::InvalidAssignment => write!(f, "invalid assignment"),
         }
     }
 }

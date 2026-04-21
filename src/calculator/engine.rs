@@ -1,3 +1,7 @@
+use crate::calculator::{
+    converter::Converter, evaluator::Evaluator, formatter::Formatter, lexer::Lexer, parser::Parser,
+};
+
 /// # Calculator Engine
 ///
 /// Main engine orchestrating the complete evaluation pipeline.
@@ -25,27 +29,7 @@ impl Engine {
         }
     }
 
-    /// # Evaluate Expression
-    ///
-    /// Evaluates a mathematical expression string and returns the formatted result.
-    ///
-    /// ## Processing Steps
-    /// 1. Check for Unicode conversion command
-    /// 2. Substitute `res` with previous result
-    /// 3. Preprocess (convert hex/bin/oct literals)
-    /// 4. Tokenize input
-    /// 5. Parse tokens into AST
-    /// 6. Evaluate AST
-    /// 7. Store result for future `res` references
-    /// 8. Format and return result
-    ///
-    /// ## Examples
-    /// ```text
-    /// engine.eval("2 + 2")        // Ok("4")
-    /// engine.eval("0xFF + 1")     // Ok("256")
-    /// engine.eval("sin(pi/2)")    // Ok("1")
-    /// ```
-    pub fn eval(&mut self, input: &str) -> Result<String, String> {
+    pub fn eval(&mut self, input: &str) -> Result<String, crate::calcerror::CalcError> {
         if input.contains("to unicode") || input.contains("to uni") {
             return Ok(Converter::unicode(input));
         }
@@ -68,7 +52,7 @@ impl Engine {
         Ok((val).to_string())
     }
 
-    pub fn full_eval(&mut self, input: &str) -> Result<String, String> {
+    pub fn full_eval(&mut self, input: &str) -> Result<String, crate::calcerror::CalcError> {
         if input.contains("to unicode") || input.contains("to uni") {
             return Ok(Converter::unicode(input));
         }

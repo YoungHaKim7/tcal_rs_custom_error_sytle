@@ -5,7 +5,8 @@ pub struct Formatter;
 impl Formatter {
     pub fn full(value: f64) -> String {
         let int_value = value as i64;
-        let dec = PriceFormatter::format(int_value);
+        let priceformatter = PriceFormatter;
+        let dec = priceformatter.format(int_value);
 
         // Format the floating-point value, removing unnecessary trailing zeros
         let float_str = if value.fract() == 0.0 {

@@ -1,3 +1,7 @@
+use std::{error::Error, path::Path};
+
+use tcal_rs_custom_error_sytle::calculator::engine::Engine;
+
 pub type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
 fn main() -> Result<()> {
@@ -43,43 +47,5 @@ fn main() -> Result<()> {
     }
 
     save_history(history_path, &history)?;
-    Ok(())
-}
-    println!(" 계산기 만들기 CLI");
-    println!(" Type 'exit' or 'quit' to exit\n");
-
-    let mut last_result: Option<f64> = None;
-    let calculator = Calculator;
-
-    loop {
-        print!("> ");
-        io::stdout().flush().unwrap();
-
-        let mut input = String::new();
-        io::stdin().read_line(&mut input).unwrap();
-
-        let input = input.trim();
-
-        if input.eq_ignore_ascii_case("exit") || input.eq_ignore_ascii_case("quit") {
-            println!("Goodbye!");
-            break;
-        }
-
-        if input.is_empty() {
-            continue;
-        }
-
-        match calculator.evaluate_expression(input, last_result) {
-            Ok(result) => {
-                let formatter = Formatter;
-                println!("{}", formatter.format_full(result));
-                last_result = Some(result);
-            }
-            Err(e) => {
-                eprintln!("Error : {}", e);
-            }
-        }
-    }
-
     Ok(())
 }

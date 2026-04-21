@@ -31,7 +31,7 @@ impl Parser {
                     expr: Box::new(value),
                 });
             }
-            return Err("Invalid assignment".into());
+            return Err(crate::calcerror::CalcError::InvalidAssignment);
         }
 
         Ok(expr)
@@ -198,7 +198,7 @@ impl Parser {
                 Ok(expr)
             }
 
-            _ => Err("Unexpected token".into()),
+            _ => Err(crate::calcerror::CalcError::InvalidToken),
         }
     }
 
@@ -234,7 +234,7 @@ impl Parser {
             self.advance();
             Ok(())
         } else {
-            Err("Expected token".into())
+            Err(crate::calcerror::CalcError::InvalidToken)
         }
     }
 }

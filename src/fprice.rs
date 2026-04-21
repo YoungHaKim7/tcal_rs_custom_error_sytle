@@ -1,7 +1,7 @@
 pub struct PriceFormatter;
 
-impl super::traits::PriceFormatterTrait for PriceFormatter {
-    fn format(&self, value: i64) -> String {
+impl PriceFormatter {
+    pub fn format(&self, value: i64) -> String {
         let s = value.to_string();
         let chars: Vec<char> = s.chars().collect();
         let mut result = String::new();

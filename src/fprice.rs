@@ -1,0 +1,17 @@
+pub struct PriceFormatter;
+
+impl super::traits::PriceFormatterTrait for PriceFormatter {
+    fn format(&self, value: i64) -> String {
+        let s = value.to_string();
+        let chars: Vec<char> = s.chars().collect();
+        let mut result = String::new();
+
+        for (i, c) in chars.iter().enumerate() {
+            if i > 0 && (chars.len() - i).is_multiple_of(3) {
+                result.push(',');
+            }
+            result.push(*c)
+        }
+        result
+    }
+}
